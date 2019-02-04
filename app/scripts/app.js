@@ -35,7 +35,10 @@ Instructions:
 
     Your code goes here!
      */
-  }
+     return fetch(url, {
+      method: 'get',
+     })
+  };
 
   /**
    * Performs an XHR for a JSON and returns a parsed JSON response.
@@ -48,6 +51,9 @@ Instructions:
 
     Your code goes here!
      */
+    return get(url).then(function(response) {
+      return response.json();
+    });
   }
 
   window.addEventListener('WebComponentsReady', function() {
@@ -58,6 +64,14 @@ Instructions:
 
     Your code goes here too!
      */
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+    .then(function(response) {
+      addSearchHeader(response.query);
+      console.log(response);
+    })
+    .catch(function(error) {
+      addSearchHeader('unknown');
+      console.log(error);
+    });
   });
 })(document);
